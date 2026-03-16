@@ -1,6 +1,6 @@
 import random
 import streamlit as st
-from logic_utils import check_guess
+from logic_utils import check_guess # Importing the check_guess function from logic_utils.py
 
 def get_range_for_difficulty(difficulty: str):
     if difficulty == "Easy":

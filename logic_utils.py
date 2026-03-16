@@ -11,6 +11,10 @@ def parse_guess(raw: str):
     """
     raise NotImplementedError("Refactor this function from app.py into logic_utils.py")
 
+# Moved the check_guess function here in logic_utils.py,
+# and updated the import statement in app.py to import it from logic_utils.py instead.
+# This way, the logic of checking the guess is separated from the UI code in app.py, making it cleaner and more modular.
+# FIX: Refactored logic into logic_utils.py using Copilot Agent mode.
 
 def check_guess(guess, secret):
     """
