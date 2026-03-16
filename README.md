@@ -49,7 +49,10 @@ This project is a Streamlit number-guessing game. The player tries to guess a hi
 
 ## 📸 Demo
 
-- ![Game Glitch](<Game Glitch Demo.png>)[Insert a screenshot of your fixed, winning game here]
+- ![Game Glitch](<Game Glitch Demo.png>)
+
+## Pytest Result
+- ![pytest](image.png)
 
 ## 🚀 Stretch Features
 
