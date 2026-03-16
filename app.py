@@ -28,23 +28,24 @@ def parse_guess(raw: str):
 
     return True, value, None
 
-
+# Logic breaks here fixMe: The game is supposed to be a number guessing game, but the check_guess function is treating the secret as a string on even attempts, which causes the comparison to fail. This is likely intentional to create a "glitchy" experience, but it can be confusing for players. To fix this, we can ensure that the secret is always treated as an integer for comparisons, regardless of the attempt number.
 def check_guess(guess, secret):
     if guess == secret:
         return "Win", "🎉 Correct!"
 
     try:
         if guess > secret:
-            return "Too High", "📈 Go HIGHER!"
+            return "Too High", "📉 Go LOWER!"
         else:
-            return "Too Low", "📉 Go LOWER!"
+            return "Too Low", "📈 Go HIGHER!"
     except TypeError:
         g = str(guess)
         if g == secret:
             return "Win", "🎉 Correct!"
         if g > secret:
-            return "Too High", "📈 Go HIGHER!"
-        return "Too Low", "📉 Go LOWER!"
+            return "Too High", "📉 Go LOWER!"
+        return "Too Low", "📈 Go HIGHER!"
+
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
