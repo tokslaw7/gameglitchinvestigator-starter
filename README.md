@@ -25,13 +25,31 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+### Game Purpose
+
+This project is a Streamlit number-guessing game. The player tries to guess a hidden number within a limited number of attempts, while the app provides feedback such as whether the guess was too high, too low, or correct. The "Game Glitch Investigator" theme turns the app into a debugging exercise where the goal is not only to play the game, but also to identify and fix broken AI-generated logic.
+
+### Bugs Found
+
+- The hint direction was reversed. When the player guessed a number that was too high, the game told them to go higher, and when the guess was too low, it told them to go lower.
+- The main game logic was defined directly inside `app.py`, which made it harder to test and refactor cleanly.
+- The existing pytest file did not match the real return value of `check_guess()`. The function returns a tuple of `(outcome, message)`, but the tests were only checking for a single string.
+- Pytest could not import `logic_utils.py` during collection because the test file did not add the project root to the import path in this environment.
+
+### Fixes Applied
+
+- Moved `check_guess()` out of `app.py` and into `logic_utils.py` so the game logic is separated from the Streamlit UI code.
+- Corrected the high/low hint bug so that:
+  - a guess above the secret returns `Too High` with `Go LOWER!`
+  - a guess below the secret returns `Too Low` with `Go HIGHER!`
+- Updated `app.py` to import `check_guess` from `logic_utils.py` instead of using an inline copy.
+- Fixed `tests/test_game_logic.py` so the tests unpack and verify both parts of the tuple returned by `check_guess()`.
+- Added a regression test that specifically checks the bug that was fixed, ensuring the hint text now matches the guess direction.
+- Updated the test file so `pytest tests/test_game_logic.py` runs successfully in this project setup.
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+- ![Game Glitch](<Game Glitch Demo.png>)[Insert a screenshot of your fixed, winning game here]
 
 ## 🚀 Stretch Features
 
